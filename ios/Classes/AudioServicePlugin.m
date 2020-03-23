@@ -139,8 +139,10 @@ static MPMediaItemArtwork* artwork = nil;
     [commandCenter.bookmarkCommand setEnabled:NO];
   } else if ([@"ready" isEqualToString:call.method]) {
     result(@YES);
-    startResult(@YES);
-    startResult = nil;
+		if (startResult != nil) {
+			startResult(@YES);
+			startResult = nil;
+		}
   } else if ([@"stopped" isEqualToString:call.method]) {
     _running = NO;
     [channel invokeMethod:@"onStopped" arguments:nil];
